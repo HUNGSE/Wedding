@@ -1,0 +1,49 @@
+# =====================================================
+# 🌸 HUNG-TRANG-WEDDING Project (Vite + Tailwind + React)
+# =====================================================
+
+# --- Node dependencies ---
+node_modules/
+
+# --- Build output ---
+dist/
+build/
+
+# --- Local env files ---
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# --- Logs & debug ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# --- IDE / Editor configs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# --- System files ---
+.DS_Store
+Thumbs.db
+
+# --- Cache files ---
+.vite/
+.cache/
+.eslintcache
+postcss-cache/
+
+# --- Tailwind / postcss temporary ---
+*.out.css
+
+# --- Optional lock files (nếu bạn không muốn commit) ---
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
