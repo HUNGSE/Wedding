@@ -1,13 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Music2, Heart } from "lucide-react";
-import img1 from "../assets/KIM03123.JPG";
-import img2 from "../assets/KIM03126.JPG";
-import img3 from "../assets/KIM03588.JPG";
-import img4 from "../assets/KIM03588.JPG";
-import img5 from "../assets/KIM03239.JPG";
-import img6 from "../assets/KIM03587.JPG";
-import img7 from "../assets/KIM03040.JPG";
+import img1 from "../assets/KIM03123.jpg";
+import img2 from "../assets/KIM03126.jpg";
+import img3 from "../assets/KIM03588.jpg";
+import img4 from "../assets/KIM03588.jpg";
+import img5 from "../assets/KIM03239.jpg";
+import img6 from "../assets/KIM03587.jpg";
+import img7 from "../assets/KIM03040.jpg";
+import heroImg from "../assets/KIM03040.jpg";
+import nenImg from "../assets/nen.jpg";
+import groomImg from "../assets/KIM03283.jpg";
+import brideImg from "../assets/KIM03784.jpg";
+import weddingVideoBg from "../assets/KIM03123.jpg";
+import ls1 from "../assets/KIM03784.jpg";
+import ls2 from "../assets/Cauhon.jpg";
+import ls3 from "../assets/Damngo.jpg";
+import ls4 from "../assets/KIM03634.jpg";
+import ls5 from "../assets/KIM03587.jpg";
+import eventsBg from "../assets/hinhnen.jpg";
+import ev1 from "../assets/KIM03123.jpg";
+import ev2 from "../assets/KIM03126.jpg";
+import ev3 from "../assets/KIM03587.jpg";
+import ev4 from "../assets/KIM03584.jpg";
+import giftBg from "../assets/hoanen.jpg";
+import qrImg from "../assets/qr.jpg";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -40,16 +58,8 @@ export default function WeddingWebsiteFull() {
   };
   const [fitMap, setFitMap] = useState({});
 
-  const images = [
-    "src/assets/KIM03040.jpg",
-    "src/assets/KIM03110.jpg",
-    "src/assets/KIM03123.jpg",
-    "src/assets/KIM03126.jpg",
-    "src/assets/KIM03584.jpg",
-    "src/assets/KIM03283.jpg",
-    "src/assets/KIM03634.jpg",
-    "src/assets/KIM03588.jpg",
-  ];
+  const images = [img1, img2, img3, img4, img5, img6];
+
 
   useEffect(() => {
     Promise.all(images.map(async (src) => [src, await getObjectFit(src)])).then(
@@ -199,7 +209,7 @@ export default function WeddingWebsiteFull() {
       >
         {/* Ảnh hero full màn hình */}
         <img
-          src="src/assets/KIM03040.jpg"   // 👉 thay bằng ảnh chính của bạn
+          src={heroImg}
           alt="Văn Hùng ♡ Huyền Trang"
           className="
       absolute inset-0
@@ -229,23 +239,11 @@ export default function WeddingWebsiteFull() {
         id="save-the-date"
         className="py-20 sm:py-28 relative flex justify-center px-4 bg-[#faf8f7]"
         style={{
-          backgroundImage: "url('/src/assets/nen.png')", // bạn có thể dùng ảnh nền texture pastel
+          backgroundImage: `url(${nenImg})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Hoa nền hai bên */}
-        <img
-          src="/src/assets/flower-left.png"
-          alt=""
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-48 opacity-50 pointer-events-none"
-        />
-        <img
-          src="/src/assets/flower-right.png"
-          alt=""
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-48 opacity-50 pointer-events-none"
-        />
-
         <div className="flex flex-col md:flex-row items-stretch gap-10 max-w-5xl w-full relative z-10">
           {/* Left Box */}
           <motion.div
@@ -362,7 +360,7 @@ export default function WeddingWebsiteFull() {
             {/* Image */}
             <div className="w-full md:w-1/2 overflow-hidden">
               <img
-                src="src/assets/KIM03283.jpg"
+                src={groomImg}
                 alt="Chú rể Văn Hùng"
                 className="w-full h-auto md:h-full object-contain md:object-cover transform hover:scale-105 transition-transform duration-500 ease-out"
               />
@@ -412,7 +410,7 @@ export default function WeddingWebsiteFull() {
             {/* Image */}
             <div className="w-full md:w-1/2 overflow-hidden">
               <img
-                src="src/assets/KIM03784.jpg"
+                src={brideImg}
                 alt="Cô dâu Huyền Trang"
                 className="w-full h-auto md:h-full object-contain md:object-cover transform hover:scale-105 transition-transform duration-500 ease-out"
               />
@@ -454,9 +452,6 @@ export default function WeddingWebsiteFull() {
             </a>
           </div>
         </div>
-
-        {/* nền hoa nhẹ */}
-        <div className="absolute inset-0 bg-[url('src/assets/flower-pattern.png')] bg-contain opacity-10"></div>
       </section>
 
 
@@ -467,8 +462,12 @@ export default function WeddingWebsiteFull() {
       >
         {/* Background image (ảnh video hoặc ảnh nền lãng mạn) */}
         <div
-          className="absolute inset-0 bg-[url('src/assets/KIM03123.jpg')] bg-cover bg-center brightness-[0.55]"
+          className="absolute inset-0 bg-cover bg-center brightness-[0.55]"
+          style={{
+            backgroundImage: `url(${weddingVideoBg})`,
+          }}
         ></div>
+
 
         {/* Overlay content */}
         <motion.div
@@ -539,35 +538,35 @@ export default function WeddingWebsiteFull() {
               title: "Tỏ tình",
               year: "2022",
               text: "Ngày ấy, một tách cà phê, một nụ cười và những cuộc trò chuyện không dứt đã mở đầu cho câu chuyện tình đầy ấm áp.",
-              image: "src/assets/KIM03784.jpg",
+              image: ls1,
               reverse: false,
             },
             {
               title: "Cầu hôn",
               year: "Tháng 4 / 2025",
               text: "Sau hơn 3 năm bên nhau, anh chuẩn bị một buổi tối giản dị nhưng đầy cảm xúc và quỳ xuống nói: 'Làm vợ anh nhé?'. Một khoảnh khắc không thể nào quên.",
-              image: "src/assets/Cauhon.jpg",
+              image: ls2,
               reverse: true,
             },
             {
               title: "Lễ dạm ngõ",
               year: "Tháng 5 / 2025",
               text: "Hai gia đình gặp mặt trong không khí ấm cúng, trao nhau lời chúc phúc và ấn định ngày trọng đại. Từ đây, hai tiếng 'thông gia' chính thức bắt đầu.",
-              image: "src/assets/Damngo.jpg",
+              image: ls3,
               reverse: false,
             },
             {
               title: "Lễ Vu Quy",
               year: "08 / 02 / 2026",
               text: "Trong tiếng nhạc nhẹ, cô dâu Huyền Trang rạng rỡ bước ra, đôi mắt long lanh. Khoảnh khắc ấy ghi dấu một chặng hành trình mới – chính thức rời nhà cha mẹ để cùng anh xây dựng tổ ấm.",
-              image: "src/assets/KIM03634.jpg",
+              image: ls4,
               reverse: true,
             },
             {
               title: "Thành Hôn",
               year: "12 / 02 / 2026",
               text: "Giây phút thiêng liêng ấy – khi hai người trao nhau lời thề nguyện. Từ đây, họ chính thức trở thành vợ chồng, cùng nhau đi tiếp chặng đường đời hạnh phúc.",
-              image: "src/assets/KIM03587.jpg",
+              image: ls5,
               reverse: false,
             },
           ].map((item, idx) => (
@@ -621,7 +620,10 @@ export default function WeddingWebsiteFull() {
         id="wedding-events"
         className="relative py-24 text-center bg-[#fcf7fa] overflow-hidden"
       >
-        <div className="absolute inset-0 bg-[url('src/assets/hinhnen.jpg')] bg-cover bg-center opacity-20 blur-sm"></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20 blur-sm"
+          style={{ backgroundImage: `url(${eventsBg})` }}
+        ></div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.h2
@@ -642,25 +644,25 @@ export default function WeddingWebsiteFull() {
                 title: "Lễ Nạp Tài",
                 time: "09:00 - 08/02/2026",
                 address: "Tư Gia Nhà Nữ - Sơn Tiến, Hà Tĩnh",
-                img: "src/assets/KIM03123.jpg",
+                img: ev1
               },
               {
                 title: "Lễ Vu Quy",
                 time: "11:30 - 08/02/2026",
                 address: "Sơn Tiến, Hà Tĩnh",
-                img: "src/assets/KIM03126.jpg",
+                img: ev2
               },
               {
                 title: "Lễ Cưới Nhà Nam",
                 time: "09:00 - 12/02/2026",
-                address: "Tư Gia Nhà Nam - Quảng Trị",
-                img: "src/assets/KIM03587.jpg",
+                address: "Tư Gia Nhà Nam - Vân Bắc - Ba Đồn - Quảng Trị",
+                img: ev3
               },
               {
                 title: "Tiệc Cưới Nhà Nam",
                 time: "12:00 - 12/02/2026",
-                address: "Nhà Văn Hóa - Quảng Trị",
-                img: "src/assets/KIM03584.jpg",
+                address: "Vân Bắc - Ba Đồn - Quảng Trị",
+                img: ev4
               },
             ].map((event, i) => (
               <motion.div
@@ -796,7 +798,11 @@ export default function WeddingWebsiteFull() {
         className="py-24 bg-[#fcf7fa] text-center relative overflow-hidden"
       >
         {/* Nền hoa chìm mờ */}
-        <div className="absolute inset-0 bg-[url('src/assets/wedding-bg-soft.jpg')] bg-cover bg-center opacity-10 blur-sm"></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-10 blur-sm"
+          style={{ backgroundImage: `url(${giftBg})`, }}
+        ></div>
+
 
         <div className="max-w-5xl mx-auto px-4 relative z-10">
           {/* Tiêu đề */}
@@ -814,7 +820,7 @@ export default function WeddingWebsiteFull() {
             {[
               {
                 title: "Mừng cưới đến Chú Rể",
-                qr: "src/assets/qr.jpg",
+                qr: qrImg,
                 bank: "VPBank",
                 accNo: "12345678910",
                 name: "Đoàn Văn Hùng",
@@ -822,7 +828,7 @@ export default function WeddingWebsiteFull() {
               },
               {
                 title: "Mừng cưới đến Cô Dâu",
-                qr: "src/assets/qr.jpg",
+                qr: qrImg,
                 bank: "VPBank",
                 accNo: "12345678910",
                 name: "Nguyễn Thị Huyền Trang",
@@ -877,7 +883,7 @@ export default function WeddingWebsiteFull() {
       {/* --- THANK YOU SECTION --- */}
       <section className="py-20 bg-[#f8f5ff] text-center relative overflow-hidden">
         {/* Nền hoa mờ pastel */}
-        <div className="absolute inset-0 bg-[url('src/assets/flower-pattern.png')] bg-repeat opacity-10"></div>
+        {/* <div className="absolute inset-0 bg-[url('src/assets/flower-pattern.png')] bg-repeat opacity-10"></div> */}
 
         <div className="relative z-10">
           <motion.div
