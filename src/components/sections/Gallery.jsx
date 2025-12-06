@@ -28,8 +28,8 @@ const GallerySlider = memo(({ fitMap }) => (
     autoplaySpeed={2500}
     pauseOnHover={true}
     responsive={[
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
+      { breakpoint: 1200, settings: { slidesToShow: 2 } },
+      { breakpoint: 900, settings: { slidesToShow: 1 } },
     ]}
   >
     {GALLERY_IMAGES.map((img, i) => (

@@ -19,10 +19,10 @@ const SaveTheDateBox = memo(({ delay }) => (
       </p>
       <div className="text-center mb-6">
         <p className="text-xl font-semibold text-[#5a4585] font-[Playfair Display,serif]">
-          Đoàn Văn Hùng
+            Văn Hùng
         </p>
         <p className="text-xl font-semibold text-[#b588a1] font-[Playfair Display,serif]">
-          Nguyễn Thị Huyền Trang
+            Huyền Trang
         </p>
       </div>
       <p className="text-gray-600 text-center mb-8 leading-relaxed">
