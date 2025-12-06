@@ -1,8 +1,9 @@
-name: Deploy Website to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -12,12 +13,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -39,7 +39,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
