@@ -2,9 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === COLOR SYSTEM STANDARDIZATION === */
+:root {
+  /* Primary Colors */
+  --color-primary-main: #5a4585;
+  --color-primary-light: #a87ca0;
+  --color-primary-accent: #b588a1;
+  --color-primary-dark: #7b68c5;
+  
+  /* Background Colors - Standardized to 2 main colors */
+  --color-bg-primary: #fcf7fa;
+  --color-bg-accent: #fff9fb;
+  --color-bg-footer: #f3effb;
+  
+  /* Support Colors */
+  --color-text: #6d6d6d;
+  --color-border: #e8d9d0;
+  --color-white: #ffffff;
+}
+
 body {
   @apply bg-white text-gray-700;
+  font-family: 'Poppins', 'DM Sans', system-ui, sans-serif;
 }
+
+/* Update old background colors to primary standardized color */
+section {
+  --section-bg: var(--color-bg-primary);
+}
+
+section#hero,
+section#wedding-video {
+  --section-bg: var(--color-bg-accent);
+}
+
+section#guestbook,
+section#wedding-events,
+section#love-story,
+section#couple,
+section#action-buttons,
+section#wedding-gift {
+  background-color: var(--color-bg-primary) !important;
+}
+
+footer {
+  background-color: var(--color-bg-footer) !important;
+}
+
+/* Typography Standardization */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  color: var(--color-primary-main);
+}
+
+.font-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-decorative {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Color utilities */
+.text-primary {
+  color: var(--color-primary-main);
+}
+
+.text-primary-light {
+  color: var(--color-primary-light);
+}
+
+.text-primary-accent {
+  color: var(--color-primary-accent);
+}
+
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.border-primary {
+  border-color: var(--color-border);
+}
+
+/* Button styling */
+button[style*="background"], 
+[style*="bg-\[#"],
+.hover\:scale-110:hover {
+  transition: all 0.3s ease;
+}
+
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);
@@ -17,6 +107,7 @@ body {
 .animate-spin-slow {
   animation: spin-slow 4s linear infinite;
 }
+
 /* ❄ Snow */
 .snow-container,
 .hearts-container {
