@@ -68,7 +68,6 @@ const GuestbookList = memo(({ items }) => (
 
 GuestbookList.displayName = "GuestbookList";
 
-// ---------------- MAIN COMPONENT ----------------
 export default function Guestbook() {
     const [messages, setMessages] = useState(GUESTBOOK_SAMPLES);
     useEffect(() => {
