@@ -239,7 +239,7 @@ export default function WeddingWebsiteFull() {
         id="save-the-date"
         className="py-20 sm:py-28 relative flex justify-center px-4 bg-[#faf8f7]"
         style={{
-          backgroundImage: `url(${nenImg})`,
+          backgroundImage: `url(${giftBg})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
