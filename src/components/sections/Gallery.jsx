@@ -29,11 +29,11 @@ const GallerySlider = memo(({ fitMap }) => (
     pauseOnHover={true}
     responsive={[
       { breakpoint: 1200, settings: { slidesToShow: 2 } },
-      { breakpoint: 900, settings: { slidesToShow: 1 } },
+      { breakpoint: 900, settings: { slidesToShow: 1, centerMode: false } },
     ]}
   >
     {GALLERY_IMAGES.map((img, i) => (
-      <div key={i} className="px-1 sm:px-2 md:px-3">
+      <div key={i} className="px-1 sm:px-2 md:px-3 w-full">
         <motion.img
           src={img}
           alt={`Ảnh cưới ${i + 1}`}

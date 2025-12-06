@@ -46,7 +46,6 @@ import img45 from "../assets/KIM03762.jpg";
 import img46 from "../assets/KIM03788.jpg";
 import img47 from "../assets/KIM03793.jpg";
 import img48 from "../assets/KIM03799.jpg";
-import heroImg from "../assets/KIM03754.jpg";
 import groomImg from "../assets/KIM03299.jpg";
 import brideImg from "../assets/KIM03784.jpg";
 import ls1 from "../assets/KIM03784.jpg";
@@ -112,7 +111,7 @@ export const LOVE_STORY_ITEMS = [
     title: "Tỏ tình",
     year: "2022",
     text: "Ngày ấy, một tách cà phê, một nụ cười và những cuộc trò chuyện không dứt đã mở đầu cho câu chuyện tình đầy ấm áp.",
-    image: ls1,
+    image: img25,
     reverse: false,
   },
   {
