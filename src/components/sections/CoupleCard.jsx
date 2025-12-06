@@ -15,7 +15,7 @@ const CoupleCardItem = memo(({ person, isGroom, delay }) => {
         <img
           src={person.image}
           alt={person.name}
-          className="w-full h-[280px] sm:h-[320px] md:h-full object-cover transform hover:scale-105 transition-transform duration-500 ease-out"
+          className="w-full sm:h-[320px] md:h-full object-cover transform hover:scale-105 transition-transform duration-500 ease-out"
         />
       </div>
 
