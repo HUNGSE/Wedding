@@ -99,7 +99,7 @@ export const COUPLE_INFO = {
   bride: {
     name: "Nguyễn Thị Huyền Trang",
     father: "Nguyễn Quốc Lập",
-    mother: "",
+    mother: "Nguyễn Thị Xanh",
     company: "FPT Software",
     description: "Là một cô gái xinh đẹp, giỏi giang và hiện đang là kỹ sư lập trình nhúng tại FPT Software. Luôn vui vẻ, năng động và mang đến năng lượng tích cực cho mọi người xung quanh.",
     image: brideImg,
