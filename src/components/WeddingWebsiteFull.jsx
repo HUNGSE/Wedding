@@ -8,8 +8,8 @@ import img4 from "../assets/KIM03588.jpg";
 import img5 from "../assets/KIM03239.jpg";
 import img6 from "../assets/KIM03587.jpg";
 import img7 from "../assets/KIM03040.jpg";
+import img8 from "../assets/KIM03143.jpg";
 import heroImg from "../assets/KIM03040.jpg";
-import nenImg from "../assets/nen.jpg";
 import groomImg from "../assets/KIM03283.jpg";
 import brideImg from "../assets/KIM03784.jpg";
 import weddingVideoBg from "../assets/KIM03123.jpg";
@@ -29,7 +29,7 @@ import qrImg from "../assets/qr.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const slides = [img1, img2, img3, img4, img5, img6, img7];
+const slides = [img1, img2, img3, img4, img5, img6, img7,img8];
 import BackgroundMusic from "./BackgroundMusic";
 import { Menu, X } from "lucide-react";
 const getObjectFit = (img) => {
