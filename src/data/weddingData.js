@@ -60,7 +60,7 @@ import ev3 from "../assets/KIM03587.jpg";
 import ev4 from "../assets/KIM03584.jpg";
 import giftBg from "../assets/hoanen.jpg";
 import qrImg from "../assets/qr.jpg";
-
+import weddingVideoFile from "../assets/ProShow Slideshow 10.mp4";
 // Gallery slides - ALL KIM images
 export const GALLERY_SLIDES = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35, img36, img37, img38, img39, img40, img41, img42, img43, img44, img45, img46, img47, img48];
 
@@ -92,7 +92,7 @@ export const COUPLE_INFO = {
     father: "Đoàn Văn Đức",
     mother: "Trần Thị Thủy",
     company: "FPT Software",
-    description: "Hiện là kỹ sư phần mềm tại FPT Software. Một người hiền lành, điềm đạm, luôn dành tình yêu thương và sự trân trọng cho gia đình cùng mọi người xung quanh.",
+    description: "Một người hiền lành, điềm đạm, luôn dành tình yêu thương và sự trân trọng cho gia đình cùng mọi người xung quanh.",
     image: groomImg,
   },
   bride: {
@@ -210,6 +210,11 @@ export const BG_IMAGES = {
   weddingVideo: img1,
   events: eventsBg,
   gift: giftBg,
+};
+
+// Video files
+export const VIDEO_FILES = {
+  wedding: weddingVideoFile,
 };
 
 // Text content
