@@ -122,7 +122,7 @@ export const LOVE_STORY_ITEMS = [
     reverse: true,
   },
   {
-    title: "Lễ dạm ngõ",
+    title: "Lễ Dạm Ngõ",
     year: "Tháng 5 / 2025",
     text: "Hai gia đình gặp mặt trong không khí ấm cúng, trao nhau lời chúc phúc và ấn định ngày trọng đại. Từ đây, hai tiếng 'thông gia' chính thức bắt đầu.",
     image: ls3,
@@ -258,6 +258,6 @@ export const TEXT_CONTENT = {
   },
   thankYou: {
     title: "Lời Cảm Ơn",
-    description: "Chúng tôi xin gửi lời cảm ơn chân thành đến gia đình, bạn bè và tất cả những người thân yêu đã luôn đồng hành, sẻ chia và gửi đến chúng tôi những lời chúc phúc tốt đẹp nhất trong ngày trọng đại này.\n\n💞 \"Tình yêu khiến mọi khoảnh khắc trở nên đáng nhớ hơn.\"",
+    description: "Vợ Chồng con xin gửi lời cảm ơn chân thành đến gia đình, bạn bè và tất cả những người thân yêu đã luôn đồng hành, sẻ chia và gửi đến hai vợ chồng những lời chúc phúc tốt đẹp nhất trong ngày trọng đại này.\n\n💞 \"Tình yêu khiến mọi khoảnh khắc trở nên đáng nhớ hơn.\"",
   },
 };
