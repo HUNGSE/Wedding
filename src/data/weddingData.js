@@ -175,7 +175,7 @@ export const GIFT_INFO = [
   {
     title: "Mừng cưới đến Chú Rể",
     qr: qrCR,
-    bank: "VPBank",
+    bank: "VIB",
     accNo: "910111998",
     name: "Đoàn Văn Hùng",
   },
