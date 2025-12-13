@@ -4,7 +4,6 @@ import img3 from "../assets/KIM03155.jpg";
 import img4 from "../assets/KIM03040.jpg";
 import img5 from "../assets/KIM03239.jpg";
 import img6 from "../assets/KIM03587.jpg";
-import img7 from "../assets/KIM03040.jpg";
 import img8 from "../assets/KIM03143.jpg";
 import img9 from "../assets/KIM03058.jpg";
 import img10 from "../assets/KIM03065.jpg";
@@ -46,9 +45,8 @@ import img45 from "../assets/KIM03762.jpg";
 import img46 from "../assets/KIM03788.jpg";
 import img47 from "../assets/KIM03793.jpg";
 import img48 from "../assets/KIM03799.jpg";
+import img49 from "../assets/KIM03123.jpg";
 import groomImg from "../assets/KIM03299.jpg";
-import brideImg from "../assets/KIM03784.jpg";
-import ls1 from "../assets/KIM03784.jpg";
 import ls2 from "../assets/Cauhon.jpg";
 import ls3 from "../assets/Damngo.jpg";
 import ls4 from "../assets/KIM03634.jpg";
@@ -60,11 +58,12 @@ import ev3 from "../assets/KIM03587.jpg";
 import ev4 from "../assets/KIM03584.jpg";
 import giftBg from "../assets/hoanen.jpg";
 import qrImg from "../assets/qr.jpg";
+import qrCR from "../assets/QR_CR.jpg";
 // Gallery slides - ALL KIM images
-export const GALLERY_SLIDES = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35, img36, img37, img38, img39, img40, img41, img42, img43, img44, img45, img46, img47, img48];
+export const GALLERY_SLIDES = [img1, img2, img3, img4, img5, img6, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35, img36, img37, img38, img39, img40, img41, img42, img43, img44, img45, img46, img47, img48,img49];
 
 // Gallery images - First 10 for display
-export const GALLERY_IMAGES = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
+export const GALLERY_IMAGES = [img1, img2, img3, img4, img5, img6, img8, img9, img10];
 
 // Menu items
 export const MENU_ITEMS = [
@@ -91,7 +90,7 @@ export const COUPLE_INFO = {
     father: "Đoàn Văn Đức",
     mother: "Trần Thị Thủy",
     company: "FPT Software",
-    description: "Một người hiền lành, điềm đạm, luôn dành tình yêu thương và sự trân trọng cho gia đình cùng mọi người xung quanh.",
+    description: "Một người đàn ông điềm đạm, chín chắn và đáng tin cậy. Trong công việc và cuộc sống, anh luôn thể hiện tinh thần trách nhiệm, sự kiên trì và quyết đoán. Ở bên ngoài, Văn Hùng giản dị, chân thành, luôn quan tâm và sẵn sàng che chở cho những người anh yêu thương.",
     image: groomImg,
   },
   bride: {
@@ -99,8 +98,8 @@ export const COUPLE_INFO = {
     father: "Nguyễn Quốc Lập",
     mother: "Nguyễn Thị Xanh",
     company: "FPT Software",
-    description: "Là một cô gái xinh đẹp, giỏi giang và hiện đang là kỹ sư lập trình nhúng tại FPT Software. Luôn vui vẻ, năng động và mang đến năng lượng tích cực cho mọi người xung quanh.",
-    image: brideImg,
+    description: "Cô nàng mang vẻ đẹp dịu dàng nhưng ẩn chứa sự bản lĩnh. Gắn bó với lập trình nhúng, Trang chinh phục công việc bằng tư duy logic, sự tỉ mỉ và kiên trì. Ngoài đời, cô toát lên nét nhẹ nhàng, ấm áp, luôn nâng niu tình cảm gia đình và những mối thân tình quanh mình.",
+    image: img46,
   },
 };
 
@@ -116,28 +115,28 @@ export const LOVE_STORY_ITEMS = [
   {
     title: "Cầu hôn",
     year: "Tháng 4 / 2025",
-    text: "Sau hơn 3 năm bên nhau, anh chuẩn bị một buổi tối giản dị nhưng đầy cảm xúc và quỳ xuống nói: 'Làm vợ anh nhé?'. Một khoảnh khắc không thể nào quên.",
+    text: "Trong một buổi tối giản dị nhưng đầy cảm xúc, anh khẽ quỳ xuống, trao lời cầu hôn: “Làm vợ anh nhé?” - khoảnh khắc thiêng liêng và không thể nào quên.",
     image: ls2,
     reverse: true,
   },
   {
     title: "Lễ Dạm Ngõ",
     year: "Tháng 5 / 2025",
-    text: "Hai gia đình gặp mặt trong không khí ấm cúng, trao nhau lời chúc phúc và ấn định ngày trọng đại. Từ đây, hai tiếng 'thông gia' chính thức bắt đầu.",
+    text: "Hai gia đình gặp gỡ trong không khí ấm cúng, trao nhau những lời chúc phúc và cùng ấn định ngày trọng đại. Từ giây phút ấy, hai tiếng “thông gia” chính thức được gắn kết.",
     image: ls3,
     reverse: false,
   },
   {
     title: "Lễ Vu Quy",
     year: "08 / 02 / 2026",
-    text: "Trong tiếng nhạc nhẹ, cô dâu Huyền Trang rạng rỡ bước ra, đôi mắt long lanh. Khoảnh khắc ấy ghi dấu một chặng hành trình mới – chính thức rời nhà cha mẹ để cùng anh xây dựng tổ ấm.",
+    text: "Trong không khí trang trọng của lễ Vu Quy, cô dâu - chú rể chính thức ra mắt họ hàng hai bên. Đây là dấu mốc ý nghĩa, đánh dấu thời khắc gia đình gửi gắm con gái để bắt đầu hành trình xây dựng tổ ấm mới.",
     image: ls4,
     reverse: true,
   },
   {
     title: "Thành Hôn",
     year: "12 / 02 / 2026",
-    text: "Giây phút thiêng liêng ấy – khi hai người trao nhau lời thề nguyện. Từ đây, họ chính thức trở thành vợ chồng, cùng nhau đi tiếp chặng đường đời hạnh phúc.",
+    text: "Giây phút thiêng liêng ấy - khi hai người trao nhau lời thề nguyện. Từ đây, họ chính thức trở thành vợ chồng, cùng nhau đi tiếp chặng đường đời hạnh phúc.",
     image: ls5,
     reverse: false,
   },
@@ -148,25 +147,25 @@ export const WEDDING_EVENTS = [
   {
     title: "Lễ Nạp Tài",
     time: "09:00 - 08/02/2026",
-    address: "Tư Gia Nhà Nữ - Sơn Tiến, Hà Tĩnh",
+    address: "Tư Gia Nhà Gái - xã Sơn Tiến, Hà Tĩnh",
     img: ev1,
   },
   {
     title: "Lễ Vu Quy",
     time: "11:30 - 08/02/2026",
-    address: "Sơn Tiến, Hà Tĩnh",
+    address: "Tư Gia Nhà Gái - xã Sơn Tiến, Hà Tĩnh",
     img: ev2,
   },
   {
-    title: "Lễ Cưới Nhà Nam",
+    title: "Lễ Cưới Nhà Trai",
     time: "09:00 - 12/02/2026",
-    address: "Tư Gia Nhà Nam - Vân Bắc - Ba Đồn - Quảng Trị",
+    address: "Tư Gia Nhà Trai - TDP Vân Bắc - Ba Đồn - Quảng Trị",
     img: ev3,
   },
   {
-    title: "Tiệc Cưới Nhà Nam",
+    title: "Tiệc Cưới Nhà Trai",
     time: "12:00 - 12/02/2026",
-    address: "Vân Bắc - Ba Đồn - Quảng Trị",
+    address: "Nhà Văn hóa - TDP Vân Bắc - Ba Đồn - Quảng Trị",
     img: ev4,
   },
 ];
@@ -175,19 +174,17 @@ export const WEDDING_EVENTS = [
 export const GIFT_INFO = [
   {
     title: "Mừng cưới đến Chú Rể",
-    qr: qrImg,
+    qr: qrCR,
     bank: "VPBank",
-    accNo: "12345678910",
+    accNo: "910111998",
     name: "Đoàn Văn Hùng",
-    branch: "TPHCM",
   },
   {
     title: "Mừng cưới đến Cô Dâu",
     qr: qrImg,
-    bank: "VPBank",
-    accNo: "12345678910",
-    name: "Nguyễn Thị Huyền Trang",
-    branch: "TPHCM",
+    bank: "VIB",
+    accNo: "363568775",
+    name: "Nguyễn Thị Huyền Trang"
   },
 ];
 
@@ -221,7 +218,7 @@ export const TEXT_CONTENT = {
     title: "Save the Date",
     subtitle: "For the wedding of",
     couple: "Văn Hùng & Huyền Trang",
-    message: "Một lời chúc của bạn chắc chắn sẽ làm cho đám cưới của chúng tôi thêm phần trọn vẹn!",
+    message: "Gửi đến giá đình hai bên, anh chị em và bạn bè thân mến, Sự hiện diện và lời chúc của mọi người sẽ làm cho hạnh phúc của chúng con/ thêm trọn vẹn.",
     buttonText: "Gửi lời chúc →",
   },
   couple: {
@@ -241,7 +238,7 @@ export const TEXT_CONTENT = {
   },
   guestbook: {
     title: "Sổ Lưu Bút",
-    description: "Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!",
+    description: "Cảm ơn mọi người rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng con 💞 Những lời chúc của mọi người sẽ là kỷ niệm quý giá mà chúng con sẽ trân trọng suốt đời.\"",
     placeholderName: "Nhập họ tên*",
     placeholderEmail: "Nhập email",
     placeholderMessage: "Nhập lời chúc của bạn*",
@@ -252,6 +249,6 @@ export const TEXT_CONTENT = {
   },
   thankYou: {
     title: "Lời Cảm Ơn",
-    description: "Vợ Chồng con xin gửi lời cảm ơn chân thành đến gia đình, bạn bè và tất cả những người thân yêu đã luôn đồng hành, sẻ chia và gửi đến hai vợ chồng những lời chúc phúc tốt đẹp nhất trong ngày trọng đại này.\n\n💞 \"Tình yêu khiến mọi khoảnh khắc trở nên đáng nhớ hơn.\"",
+    description: "Vợ Chồng con xin gửi lời cảm ơn chân thành đến gia đình, bạn bè và tất cả những người thân yêu đã luôn đồng hành, sẻ chia và gửi đến hai vợ chồng những lời chúc phúc tốt đẹp nhất trong ngày trọng đại này.\n\n💞  Chúng con/mình rất muốn chụp chung với mọi người những tấm hình kỷ niệm, vì vậy hãy đến sớm hơn một chút nha\n\n💞 \"Tình yêu khiến mọi khoảnh khắc trở nên đáng nhớ hơn.\"",
   },
 };

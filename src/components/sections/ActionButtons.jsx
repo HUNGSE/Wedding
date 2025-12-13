@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 
 const ACTION_ITEMS = [
   { id: "guestbook", label: "Gửi lời chúc", icon: "💌", bgColor: "bg-[#f9c9d4] hover:bg-[#f7b7c5]" },
-  { id: "events", label: "Xác nhận tham dự", icon: "🎉", bgColor: "bg-[#d9c8f3] hover:bg-[#c5b3ea]" },
   { id: "wedding-gift", label: "Mừng cưới", icon: "💖", bgColor: "bg-[#f2d3e4] hover:bg-[#eac0d8]" },
 ];
 
@@ -30,7 +29,7 @@ export default function ActionButtons() {
           transition={{ duration: 0.6 }}
           className="text-2xl font-[Playfair Display,serif] text-[#5a4585] italic mb-8"
         >
-          Hãy cùng chung vui với chúng tôi 💞
+          Hãy cùng chung vui với chúng con 💞
         </motion.h3>
 
         <div className="flex flex-col sm:flex-row justify-center gap-6">

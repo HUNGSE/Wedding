@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 const FOOTER_CONFIG = {
   year: 2025,
-  couple: "Văn Hùng & Huyền Trang",
-  message: "Made with 💜 & Love",
+  couple: "Văn Hùng 💜 Huyền Trang",
+  message: "Made with Love",
 };
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        © {FOOTER_CONFIG.year} {FOOTER_CONFIG.couple} · Thiệp cưới hiện đại · {FOOTER_CONFIG.message}
+        © {FOOTER_CONFIG.year} {FOOTER_CONFIG.couple} · {FOOTER_CONFIG.message}
       </motion.div>
     </footer>
   );

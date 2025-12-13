@@ -25,7 +25,7 @@ export default function WeddingVideo() {
         className="relative z-10 flex flex-col items-center justify-center px-4"
       >
         <h2 className="text-3xl sm:text-4xl font-[Cormorant Garamond,serif] text-white font-semibold mb-3 drop-shadow-md">
-          Xem video cưới của chúng tôi
+          Xem video cưới của chúng con
         </h2>
 
         <p className="text-white/90 font-[DM Sans,sans-serif] max-w-xl mx-auto mb-8 text-sm sm:text-base drop-shadow">

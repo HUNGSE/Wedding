@@ -34,9 +34,6 @@ const GiftCard = memo(({ item, i }) => (
       <p>
         👤 <strong>Tên tài khoản:</strong> {item.name}
       </p>
-      <p>
-        📍 <strong>Chi nhánh:</strong> {item.branch}
-      </p>
     </div>
 
     <hr className="w-2/3 my-6 border-[#e8d9d0]" />

@@ -2,7 +2,6 @@ import { memo, useCallback } from "react";
 
 const FLOATING_ITEMS = [
   { id: "guestbook", emoji: "💬", title: "Gửi lời chúc", bgColor: "bg-[#f7c6d6] hover:bg-[#f3b4c6]" },
-  { id: "events", emoji: "✉️", title: "Xác nhận tham dự", bgColor: "bg-[#d6c5f8] hover:bg-[#c2b0f0]" },
   { id: "wedding-gift", emoji: "💰", title: "Mừng cưới", bgColor: "bg-[#e8c8e3] hover:bg-[#dfb4d9]" },
 ];
 

@@ -33,13 +33,13 @@ const CoupleCardItem = memo(({ person, isGroom, delay }) => {
         <p className="text-[#6d6d6d] leading-relaxed text-[15px]">
           {isGroom ? (
             <>
-              Hiện là kỹ sư phần mềm tại <strong className="text-[#5a4585]">{person.company}</strong>.
+              Hiện là kỹ sư phần mềm tại một công ty công nghệ lớn. 
               {person.description}
             </>
           ) : (
             <>
               Là một cô gái xinh đẹp, giỏi giang và hiện đang là kỹ sư lập trình nhúng
-              tại <strong className="text-[#5a4585]">{person.company}</strong>.
+              tại.
               {person.description}
             </>
           )}

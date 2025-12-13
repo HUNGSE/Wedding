@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo, memo } from "react";
 import { motion } from "framer-motion";
 import { TEXT_CONTENT } from "../../data/weddingData";
+import saveBg from "../../assets/nen2.jpg";
+import saveBG1 from "../../assets/nen1.jpg";
 
 const SaveTheDateBox = memo(({ delay }) => (
   <motion.div
@@ -8,6 +10,12 @@ const SaveTheDateBox = memo(({ delay }) => (
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.8, delay }}
     viewport={{ once: true }}
+        style={{
+      backgroundImage: `url(${saveBG1})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
     className="flex-1 bg-white border border-[#e8d9d0] rounded-2xl shadow-md p-8 md:p-10 flex flex-col justify-between hover:shadow-lg transition-shadow"
   >
     <div>
@@ -53,9 +61,15 @@ const CountdownBox = memo(({ timeLeft, title, date, dayOfMonth, delay }) => (
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.8, delay }}
     viewport={{ once: true }}
-    className="flex-1 bg-white border border-[#e8d9d0] rounded-2xl shadow-md p-8 md:p-10 flex flex-col justify-between hover:shadow-lg transition-shadow"
+        style={{
+      backgroundImage: `url(${saveBg})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+    className="flex-1 bg-white border border-[#e8d9d0] rounded-2xl shadow-md p-8 md:p-10 flex flex-col justify-between hover:shadow-lg transition-shadow" 
   >
-    <div className="text-[#5a4585] font-semibold mb-4 text-lg text-center font-[Playfair Display,serif]">
+    <div className="text-[#5a4585]  font-semibold mb-4 text-lg text-center font-[Playfair Display,serif]">
       {title}
     </div>
 
@@ -85,7 +99,7 @@ const CountdownBox = memo(({ timeLeft, title, date, dayOfMonth, delay }) => (
     </div>
 
     {/* Countdown */}
-    <div className="flex justify-center gap-4 sm:gap-6 text-[#b588a1] font-[Playfair Display,serif]">
+    <div className="flex p-[10px] justify-center gap-4 sm:gap-6 text-[#b588a1] font-[Playfair Display,serif]">
       {Object.entries(timeLeft).map(([label, value]) => (
         <div key={label} className="text-center">
           <div className="text-2xl sm:text-3xl font-bold text-[#5a4585]">{String(value).padStart(2, "0")}</div>
