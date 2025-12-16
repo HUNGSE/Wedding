@@ -93,7 +93,7 @@ export default function Guestbook() {
                 },
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             );
-
+            window.scrollTo({ top: 0, behavior: "smooth" });
             toast.success(
                 `💌 Lời chúc của ${data.name} đã được gửi thành công tới Cô Dâu & Chú Rể.
 Cảm ơn tình cảm của ${data.name} rất nhiều!`,
