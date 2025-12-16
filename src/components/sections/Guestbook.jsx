@@ -1,7 +1,8 @@
 import { useState, useCallback, memo, useEffect } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";  // ⬅ THÊM DÒNG NÀY
+import emailjs from "@emailjs/browser";
 import { TEXT_CONTENT, GUESTBOOK_SAMPLES } from "../../data/weddingData";
+import { toast } from "react-toastify";
 
 const GuestbookForm = memo(({ onSubmit }) => {
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -93,11 +94,24 @@ export default function Guestbook() {
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             );
 
-            console.log("🎉 Email sent successfully!");
+            toast.success(
+                `💌 Lời chúc của ${data.name} đã được gửi thành công tới Cô Dâu & Chú Rể.
+Cảm ơn tình cảm của ${data.name} rất nhiều!`,
+                {
+                    style: {
+                        whiteSpace: "pre-line",
+                        textAlign: "center",
+                    },
+                }
+            );
+
         } catch (err) {
             console.error("❌ Email send error:", err);
+
+            toast.error("❌ Gửi lời chúc thất bại, vui lòng thử lại sau!");
         }
     };
+
     const handleSubmit = useCallback(
         (formData) => {
             const newList = [formData, ...messages];
