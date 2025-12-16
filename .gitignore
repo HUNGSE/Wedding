@@ -47,7 +47,3 @@ postcss-cache/
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
-src/assets/*.mp4
-src/assets/*.mov
-src/assets/*.avi
-*.mp4
