@@ -17,7 +17,6 @@ const chunkArray = (arr, size) => {
 export default function Gallery() {
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
   const [activeIndex, setActiveIndex] = useState(null);
-  const [autoPlay, setAutoPlay] = useState(false);
 
   const visibleImages = GALLERY_SLIDES.slice(0, visibleCount);
   const rows = chunkArray(visibleImages, 3);
@@ -32,12 +31,6 @@ export default function Gallery() {
     () => setActiveIndex((i) => (i - 1 + visibleImages.length) % visibleImages.length),
     [visibleImages.length]
   );
-
-  useEffect(() => {
-    if (!autoPlay) return;
-    const t = setInterval(next, 3000);
-    return () => clearInterval(t);
-  }, [autoPlay, next]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -189,29 +182,71 @@ export default function Gallery() {
           <motion.div
             className="
               fixed inset-0 z-50 bg-black/85
-              flex flex-col items-center justify-center
+              flex items-center justify-center
             "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setActiveIndex(null)}
           >
-            <motion.img
-              key={visibleImages[activeIndex]}
-              src={visibleImages[activeIndex]}
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="max-h-[85vh] max-w-[90vw] rounded-2xl"
-            />
+            {/* IMAGE WRAPPER */}
+            <div
+              className="relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* IMAGE */}
+              <motion.img
+                key={visibleImages[activeIndex]}
+                src={visibleImages[activeIndex]}
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                className="max-h-[85vh] max-w-[90vw] rounded-2xl"
+              />
 
-            {/* CONTROLS */}
-            <div className="mt-6 flex gap-4 text-white">
-              <button onClick={prev}>←</button>
-              <button onClick={() => setAutoPlay((v) => !v)}>
-                {autoPlay ? "Pause" : "Play"}
+              {/* ❌ CLOSE (TOP RIGHT) */}
+              <button
+                onClick={() => setActiveIndex(null)}
+                className="
+                  absolute -top-4 -right-4
+                  w-10 h-10 rounded-full
+                  bg-black/70 text-white
+                  flex items-center justify-center
+                  hover:bg-black transition
+                "
+              >
+                ✕
               </button>
-              <button onClick={next}>→</button>
-              <button onClick={() => setActiveIndex(null)}>✕</button>
+
+              {/* ◀ PREV – MOBILE & DESKTOP */}
+              <button
+                onClick={prev}
+                className="
+                  absolute left-2 md:left-[-56px]
+                  top-1/2 -translate-y-1/2
+                  w-10 h-10 rounded-full
+                  bg-black/40 text-white text-3xl
+                  flex items-center justify-center
+                  hover:bg-black/60 transition
+                "
+              >
+                ‹
+              </button>
+
+              {/* ▶ NEXT – MOBILE & DESKTOP */}
+              <button
+                onClick={next}
+                className="
+                  absolute right-2 md:right-[-56px]
+                  top-1/2 -translate-y-1/2
+                  w-10 h-10 rounded-full
+                  bg-black/40 text-white text-3xl
+                  flex items-center justify-center
+                  hover:bg-black/60 transition
+                "
+              >
+                ›
+              </button>
             </div>
           </motion.div>
         )}
@@ -232,11 +267,7 @@ const ImageCard = memo(({ src, big = false, onClick }) => (
       loading="lazy"
       className={`
         w-full
-        ${
-          big
-            ? "h-[520px]"
-            : "h-[250px]"
-        }
+        ${big ? "h-[520px]" : "h-[250px]"}
         object-cover object-[50%_20%]
         hover:scale-105 transition-transform duration-500
       `}
