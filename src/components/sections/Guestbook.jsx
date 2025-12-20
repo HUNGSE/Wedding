@@ -98,12 +98,14 @@ export default function Guestbook() {
                 `💌 Lời chúc của ${data.name} đã được gửi thành công tới Cô Dâu & Chú Rể.
 Cảm ơn tình cảm của ${data.name} rất nhiều!`,
                 {
+                    autoClose: 8000,
                     style: {
                         whiteSpace: "pre-line",
                         textAlign: "center",
                     },
                 }
             );
+
 
         } catch (err) {
             console.error("❌ Email send error:", err);

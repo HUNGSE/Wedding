@@ -1,18 +1,34 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { BG_IMAGES, TEXT_CONTENT } from "../../data/weddingData";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  return isMobile;
+}
+
 export default function HeroSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center text-center overflow-hidden w-full h-screen bg-[#fff9fb]"
+      className="relative flex items-center justify-center w-full h-screen overflow-hidden bg-[#fff9fb]"
     >
-      {/* Ảnh hero với parallax effect */}
+      {/* Hero image */}
       <motion.div
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="absolute inset-0 overflow-hidden"
+        className="absolute inset-0"
       >
         <img
           src={BG_IMAGES.hero}
@@ -21,51 +37,40 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      {/* Gradient overlay - tối hơn để text nổi hơn */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/35" />
 
-      {/* Text container */}
+      {/* TEXT – CENTER + RESPONSIVE OFFSET */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: isMobile ? -40 : -80 }}
+        animate={{ opacity: 1, y: isMobile ? -80 : -140 }}
         transition={{ duration: 1, delay: 0.3 }}
-        className="relative z-10 text-white drop-shadow-lg px-4 max-w-4xl"
+        className="relative z-10 text-center text-white drop-shadow-lg px-4 max-w-4xl"
       >
-        {/* Title */}
         <motion.h2
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-[Dancing Script,cursive] mb-4 font-light tracking-wide"
+          className="text-4xl sm:text-6xl lg:text-7xl font-[Dancing Script,cursive] font-light tracking-wide mb-4"
         >
           {TEXT_CONTENT.hero.title}
         </motion.h2>
 
-        {/* Date */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className="text-base sm:text-xl italic font-light tracking-widest text-white/90"
+          className="text-sm sm:text-xl italic font-light tracking-widest text-white/90"
         >
           {TEXT_CONTENT.hero.date}
         </motion.p>
 
-        {/* Decorative line */}
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: 80 }}
           transition={{ duration: 1, delay: 0.9 }}
           className="h-px bg-white/60 mx-auto mt-8"
-        ></motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-      >
+        />
       </motion.div>
     </section>
   );
