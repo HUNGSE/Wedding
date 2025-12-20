@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const FOOTER_CONFIG = {
   year: 2025,
-  couple: "Văn Hùng 💜 Huyền Trang",
+  couple: "Huyền Trang 💜 Văn Hùng",
   message: "Made with Love",
 };
 

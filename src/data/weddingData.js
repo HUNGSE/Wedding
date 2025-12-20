@@ -78,7 +78,7 @@ export const MENU_ITEMS = [
 // Wedding details
 export const WEDDING_CONFIG = {
   date: "2026-02-12T10:30:00",
-  coupleNames: "Văn Hùng ♡ Huyền Trang",
+  coupleNames: "Huyền Trang ♡ Văn Hùng",
   groomName: "Đoàn Văn Hùng",
   brideName: "Nguyễn Thị Huyền Trang",
 };
@@ -90,7 +90,7 @@ export const COUPLE_INFO = {
     father: "Đoàn Văn Đức",
     mother: "Trần Thị Thủy",
     company: "FPT Software",
-    description: "Một người đàn ông điềm đạm, chín chắn và đáng tin cậy. Trong công việc và cuộc sống, anh luôn thể hiện tinh thần trách nhiệm, sự kiên trì và quyết đoán. Ở bên ngoài, Văn Hùng giản dị, chân thành, luôn quan tâm và sẵn sàng che chở cho những người anh yêu thương.",
+    description: " Một người đàn ông điềm đạm, chín chắn và đáng tin cậy. Trong công việc và cuộc sống, anh luôn thể hiện tinh thần trách nhiệm, sự kiên trì và quyết đoán. Ở bên ngoài, Văn Hùng giản dị, chân thành, luôn quan tâm và sẵn sàng che chở cho những người anh yêu thương.",
     image: groomImg,
   },
   bride: {
@@ -98,7 +98,7 @@ export const COUPLE_INFO = {
     father: "Nguyễn Quốc Lập",
     mother: "Nguyễn Thị Xanh",
     company: "FPT Software",
-    description: "Cô nàng mang vẻ đẹp dịu dàng nhưng ẩn chứa sự bản lĩnh. Gắn bó với lập trình nhúng, Trang chinh phục công việc bằng tư duy logic, sự tỉ mỉ và kiên trì. Ngoài đời, cô toát lên nét nhẹ nhàng, ấm áp, luôn nâng niu tình cảm gia đình và những mối thân tình quanh mình.",
+    description: " Cô nàng mang vẻ đẹp dịu dàng nhưng ẩn chứa sự bản lĩnh. Gắn bó với lập trình nhúng, Trang chinh phục công việc bằng tư duy logic, sự tỉ mỉ và kiên trì. Ngoài đời, cô toát lên nét nhẹ nhàng, ấm áp, luôn nâng niu tình cảm gia đình và những mối thân tình xung quanh.",
     image: img46,
   },
 };
@@ -114,14 +114,14 @@ export const LOVE_STORY_ITEMS = [
   },
   {
     title: "Cầu hôn",
-    year: "Tháng 4 / 2025",
+    year: "19 / 04 / 2025",
     text: "Trong một buổi tối giản dị nhưng đầy cảm xúc, anh khẽ quỳ xuống, trao lời cầu hôn: “Làm vợ anh nhé?” - khoảnh khắc thiêng liêng và không thể nào quên.",
     image: ls2,
     reverse: true,
   },
   {
     title: "Lễ Dạm Ngõ",
-    year: "Tháng 5 / 2025",
+    year: "29 / 04 / 2025",
     text: "Hai gia đình gặp gỡ trong không khí ấm cúng, trao nhau những lời chúc phúc và cùng ấn định ngày trọng đại. Từ giây phút ấy, hai tiếng “thông gia” chính thức được gắn kết.",
     image: ls3,
     reverse: false,
@@ -152,19 +152,19 @@ export const WEDDING_EVENTS = [
   },
   {
     title: "Lễ Vu Quy",
-    time: "11:30 - 08/02/2026",
+    time: "10:30 - 08/02/2026",
     address: "Tư Gia Nhà Gái - xã Sơn Tiến, Hà Tĩnh",
     img: ev2,
   },
   {
     title: "Lễ Cưới Nhà Trai",
-    time: "09:00 - 12/02/2026",
+    time: "08:45 - 12/02/2026",
     address: "Tư Gia Nhà Trai - TDP Vân Bắc - Ba Đồn - Quảng Trị",
     img: ev3,
   },
   {
     title: "Tiệc Cưới Nhà Trai",
-    time: "12:00 - 12/02/2026",
+    time: "11:30 - 12/02/2026",
     address: "Nhà Văn hóa - TDP Vân Bắc - Ba Đồn - Quảng Trị",
     img: ev4,
   },
@@ -211,14 +211,14 @@ export const BG_IMAGES = {
 // Text content
 export const TEXT_CONTENT = {
   hero: {
-    title: "Văn Hùng ♡ Huyền Trang",
-    date: "12 Tháng 2, 2026",
+    title: "Huyền Trang ♡ Văn Hùng",
+    date: "12 Tháng 02, 2026",
   },
   saveTheDate: {
     title: "Save the Date",
     subtitle: "For the wedding of",
-    couple: "Văn Hùng & Huyền Trang",
-    message: "Gửi đến giá đình hai bên, anh chị em và bạn bè thân mến, Sự hiện diện và lời chúc của mọi người sẽ làm cho hạnh phúc của chúng con/ thêm trọn vẹn.",
+    couple: "Huyền Trang & Văn Hùng",
+    message: "Gửi đến gia đình hai bên, anh chị em và bạn bè thân mến 💞\n Sự hiện diện và lời chúc của mọi người sẽ làm cho hạnh phúc của chúng con thêm trọn vẹn.",
     buttonText: "Gửi lời chúc →",
   },
   couple: {
@@ -227,7 +227,7 @@ export const TEXT_CONTENT = {
   },
   loveStory: {
     title: "Chuyện Tình Yêu",
-    description: "Tình yêu không chỉ là một danh từ – nó là một động từ. Nó là sự quan tâm, chia sẻ, giúp đỡ và hy sinh mỗi ngày.",
+    description: "Tình yêu không chỉ là một danh từ - nó là một động từ. Nó là sự quan tâm, chia sẻ, giúp đỡ và hy sinh mỗi ngày.",
   },
   weddingEvents: {
     title: "Sự Kiện Cưới",
@@ -238,7 +238,7 @@ export const TEXT_CONTENT = {
   },
   guestbook: {
     title: "Sổ Lưu Bút",
-    description: "Cảm ơn mọi người rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng con 💞 Những lời chúc của mọi người sẽ là kỷ niệm quý giá mà chúng con sẽ trân trọng suốt đời.\"",
+    description: "Cảm ơn mọi người rất nhiều vì những lời chúc mừng tốt đẹp. Những lời chúc của mọi người sẽ là kỷ niệm quý giá mà chúng con sẽ trân trọng suốt đời.",
     placeholderName: "Nhập họ tên*",
     placeholderEmail: "Nhập email",
     placeholderMessage: "Nhập lời chúc của bạn*",

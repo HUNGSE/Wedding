@@ -33,13 +33,12 @@ const CoupleCardItem = memo(({ person, isGroom, delay }) => {
         <p className="text-[#6d6d6d] leading-relaxed text-[15px]">
           {isGroom ? (
             <>
-              Hiện là kỹ sư phần mềm tại một công ty công nghệ lớn. 
+              Hiện là Kỹ sư Phần mềm tại một công ty công nghệ tại Việt Nam.
               {person.description}
             </>
           ) : (
             <>
-              Là một cô gái xinh đẹp, giỏi giang và hiện đang là kỹ sư lập trình nhúng
-              tại.
+              Là một cô gái xinh đẹp, giỏi giang và hiện đang là Kỹ sư lập trình Nhúng.
               {person.description}
             </>
           )}
@@ -67,7 +66,7 @@ export default function CoupleCard() {
         <h2 className="text-4xl font-[Playfair Display,serif] text-[#5a4585] italic mb-3">
           {TEXT_CONTENT.couple.title}
         </h2>
-        <p className="text-[#6d6d6d] text-base max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[#6d6d6d] text-base max-w-[43rem] mx-auto leading-relaxed">
           {TEXT_CONTENT.couple.description}
         </p>
       </motion.div>

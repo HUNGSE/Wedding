@@ -38,7 +38,7 @@ export default function Navbar() {
           className="font-[Great_Vibes] text-2xl sm:text-3xl text-[#c589b7] tracking-wide cursor-pointer"
           onClick={() => handleScroll("#hero")}
         >
-          VH ♡ HT
+          HT ♡ VH
         </motion.h1>
 
         {/* Nút menu cho mobile */}

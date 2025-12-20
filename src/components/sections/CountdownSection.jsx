@@ -27,15 +27,15 @@ const SaveTheDateBox = memo(({ delay }) => (
       </p>
       <div className="text-center mb-6">
         <p className="text-xl font-semibold text-[#5a4585] font-[Playfair Display,serif]">
-            Văn Hùng
+            Huyền Trang
         </p>
         <p className="text-xl font-semibold text-[#b588a1] font-[Playfair Display,serif]">
-            Huyền Trang
+            Văn Hùng
         </p>
       </div>
       <p className="text-gray-600 text-center mb-8 leading-relaxed">
         {TEXT_CONTENT.saveTheDate.message}
-      </p>
+      </p> 
     </div>
     <div className="text-center">
       <button 
@@ -168,8 +168,8 @@ function CountdownSection() {
     >
       <div className="flex flex-col md:flex-row items-stretch gap-10 max-w-5xl w-full relative z-10">
         <SaveTheDateBox delay={0} />
-        <CountdownBox timeLeft={brideDateCountdown} title="💕 Nhà Gái" date="8 Tháng 2, 2026" dayOfMonth={8} delay={0.2} />
-        <CountdownBox timeLeft={groomDateCountdown} title="💍 Nhà Trai" date="12 Tháng 2, 2026" dayOfMonth={12} delay={0.4} />
+        <CountdownBox timeLeft={brideDateCountdown} title="💕 Nhà Gái" date="08 Tháng 02, 2026" dayOfMonth={8} delay={0.2} />
+        <CountdownBox timeLeft={groomDateCountdown} title="💍 Nhà Trai" date="12 Tháng 02, 2026" dayOfMonth={12} delay={0.4} />
       </div>
     </section>
   );
