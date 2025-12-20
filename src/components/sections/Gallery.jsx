@@ -268,7 +268,10 @@ const ImageCard = memo(({ src, big = false, onClick }) => (
       className={`
         w-full
         ${big ? "h-[520px]" : "h-[250px]"}
-        object-cover object-[50%_20%]
+        object-cover
+        object-[50%_20%]
+        ${big ? "md:object-center" : ""}
+
         hover:scale-105 transition-transform duration-500
       `}
     />

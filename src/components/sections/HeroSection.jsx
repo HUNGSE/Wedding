@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { BG_IMAGES, TEXT_CONTENT } from "../../data/weddingData";
 
+/* ===== Detect mobile ===== */
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -17,6 +18,17 @@ function useIsMobile() {
 
 export default function HeroSection() {
   const isMobile = useIsMobile();
+
+  /* ===== Split title from data ===== */
+  const { left, heart, right } = useMemo(() => {
+    const title = TEXT_CONTENT.hero.title || "";
+    const parts = title.split("♡");
+    return {
+      left: parts[0]?.trim() || "",
+      heart: "♡",
+      right: parts[1]?.trim() || "",
+    };
+  }, []);
 
   return (
     <section
@@ -47,15 +59,43 @@ export default function HeroSection() {
         transition={{ duration: 1, delay: 0.3 }}
         className="relative z-10 text-center text-white drop-shadow-lg px-4 max-w-4xl"
       >
+        {/* TITLE */}
         <motion.h2
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-4xl sm:text-6xl lg:text-7xl font-[Dancing Script,cursive] font-light tracking-wide mb-4"
+          className="
+            font-[Dancing Script,cursive]
+            font-light tracking-wide mb-4
+            leading-tight
+            text-4xl sm:text-6xl lg:text-7xl
+          "
         >
-          {TEXT_CONTENT.hero.title}
+          {/* LEFT NAME */}
+          <span className="block sm:inline">
+            {left}
+          </span>
+
+          {/* HEART */}
+          <span
+            className="
+              block sm:inline
+              text-2xl sm:text-4xl
+              my-1 sm:my-0
+              sm:mx-3
+              opacity-90
+            "
+          >
+            {heart}
+          </span>
+
+          {/* RIGHT NAME */}
+          <span className="block sm:inline">
+            {right}
+          </span>
         </motion.h2>
 
+        {/* DATE */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -65,6 +105,7 @@ export default function HeroSection() {
           {TEXT_CONTENT.hero.date}
         </motion.p>
 
+        {/* DECORATIVE LINE */}
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: 80 }}
