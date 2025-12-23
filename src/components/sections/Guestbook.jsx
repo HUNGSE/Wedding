@@ -1,21 +1,23 @@
 import { useState, useCallback, memo, useEffect } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
-import { TEXT_CONTENT, GUESTBOOK_SAMPLES } from "../../data/weddingData";
+import { TEXT_CONTENT } from "../../data/weddingData";
 import { toast } from "react-toastify";
+
+/* ================= CONFIG ================= */
+const SHEET_API_URL =
+    "https://script.google.com/macros/s/AKfycbzqggp5OJVcaD12Z1qPhtA0oehbEzSJfMc0v0k_hEph4HqxWzoAJb77k-Z67fFciCdkZw/exec";
 
 /* ================= FORM ================= */
 const GuestbookForm = memo(({ onSubmit }) => {
     const [formData, setFormData] = useState({
         name: "",
-        email: "",
         message: "",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(formData);
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", message: "" });
     };
 
     return (
@@ -23,27 +25,16 @@ const GuestbookForm = memo(({ onSubmit }) => {
             onSubmit={handleSubmit}
             className="bg-white border border-[#e8d9d0] rounded-2xl p-8 shadow-md text-left"
         >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <input
-                    type="text"
-                    placeholder={TEXT_CONTENT.guestbook.placeholderName}
-                    value={formData.name}
-                    onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-[#b588a1] text-sm"
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder={TEXT_CONTENT.guestbook.placeholderEmail}
-                    value={formData.email}
-                    onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-[#b588a1] text-sm"
-                />
-            </div>
+            <input
+                type="text"
+                placeholder={TEXT_CONTENT.guestbook.placeholderName}
+                value={formData.name}
+                onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                }
+                className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-[#b588a1] text-sm mb-4"
+                required
+            />
 
             <textarea
                 placeholder={TEXT_CONTENT.guestbook.placeholderMessage}
@@ -71,6 +62,12 @@ GuestbookForm.displayName = "GuestbookForm";
 /* ================= LIST ================= */
 const GuestbookList = memo(({ items }) => (
     <div className="bg-white border border-[#e8d9d0] rounded-2xl p-8 shadow-md text-left max-h-[420px] overflow-y-auto">
+        {items.length === 0 && (
+            <p className="text-sm text-gray-500 italic text-center">
+                Chưa có lời chúc nào 💌
+            </p>
+        )}
+
         {items.map((item, idx) => (
             <motion.div
                 key={idx}
@@ -98,55 +95,44 @@ GuestbookList.displayName = "GuestbookList";
 
 /* ================= MAIN ================= */
 export default function Guestbook() {
-    const [messages, setMessages] = useState(GUESTBOOK_SAMPLES);
+    const [messages, setMessages] = useState([]);
     const [inlineNoticeName, setInlineNoticeName] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const stored = localStorage.getItem("guestbookMessages");
-        if (stored) {
-            setMessages(JSON.parse(stored));
-        }
+        fetch(SHEET_API_URL)
+            .then((res) => res.json())
+            .then((data) => {
+                setMessages(data.reverse());
+                setLoading(false);
+            })
+            .catch(() => {
+                toast.error("❌ Không tải được lời chúc");
+                setLoading(false);
+            });
     }, []);
 
-    const sendEmail = async (data) => {
-        const time = new Date().toLocaleString("vi-VN");
-
-        try {
-            await emailjs.send(
-                import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                {
-                    name: data.name,
-                    email: data.email,
-                    message: data.message,
-                    time,
-                },
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-            );
-        } catch (err) {
-            console.error("❌ Email send error:", err);
-            toast.error("❌ Gửi lời chúc thất bại, vui lòng thử lại sau!");
-        }
+    const sendWishToSheet = async (data) => {
+        await fetch(SHEET_API_URL, {
+            method: "POST",
+            body: JSON.stringify(data),
+        });
     };
 
     const handleSubmit = useCallback(
-        (formData) => {
-            const newList = [formData, ...messages];
-            setMessages(newList);
-            localStorage.setItem(
-                "guestbookMessages",
-                JSON.stringify(newList)
-            );
-            setInlineNoticeName(formData.name);
+        async (formData) => {
+            try {
+                setMessages((prev) => [formData, ...prev]);
 
-            // ✅ Tự động ẩn sau 8 giây
-            setTimeout(() => {
-                setInlineNoticeName(null);
-            }, 8000);
+                setInlineNoticeName(formData.name);
+                setTimeout(() => setInlineNoticeName(null), 8000);
 
-            sendEmail(formData);
+                await sendWishToSheet(formData);
+            } catch {
+                toast.error("❌ Gửi lời chúc thất bại");
+            }
         },
-        [messages]
+        []
     );
 
     return (
@@ -172,7 +158,6 @@ export default function Guestbook() {
                     <GuestbookForm onSubmit={handleSubmit} />
 
                     <div className="space-y-4">
-                        {/* INLINE NOTICE – 8s */}
                         {inlineNoticeName && (
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
@@ -189,7 +174,13 @@ Cảm ơn tình cảm của ${inlineNoticeName} rất nhiều!`}
                             </motion.div>
                         )}
 
-                        <GuestbookList items={messages} />
+                        {loading ? (
+                            <p className="text-sm text-gray-500 italic text-center">
+                                Đang tải lời chúc…
+                            </p>
+                        ) : (
+                            <GuestbookList items={messages} />
+                        )}
                     </div>
                 </div>
             </div>
