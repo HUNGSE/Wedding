@@ -129,7 +129,7 @@ export default function Guestbook() {
 
                 await sendWishToSheet(formData);
             } catch {
-                toast.error("❌ Gửi lời chúc thất bại");
+                toast.error("❌ Gửi lời chúc của bạn đang có sự cố, chúng tôi sẽ báo cho Cô Dâu & Chú Rể ngay!");
             }
         },
         []
