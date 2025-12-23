@@ -16,21 +16,33 @@ const chunkArray = (arr, size) => {
 /* ================= MAIN ================= */
 export default function Gallery() {
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null); // index trong GALLERY_SLIDES
 
   const visibleImages = GALLERY_SLIDES.slice(0, visibleCount);
   const rows = chunkArray(visibleImages, 3);
 
-  /* ===== LIGHTBOX CONTROLS ===== */
-  const next = useCallback(
-    () => setActiveIndex((i) => (i + 1) % visibleImages.length),
-    [visibleImages.length]
-  );
+  /* ===== LIGHTBOX CONTROLS (FULL GALLERY) ===== */
+  const next = useCallback(() => {
+    setActiveIndex((i) => {
+      const nextIndex = i + 1;
+      if (
+        nextIndex >= visibleCount &&
+        visibleCount < GALLERY_SLIDES.length
+      ) {
+        setVisibleCount((v) =>
+          Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
+        );
+      }
 
-  const prev = useCallback(
-    () => setActiveIndex((i) => (i - 1 + visibleImages.length) % visibleImages.length),
-    [visibleImages.length]
-  );
+      return nextIndex % GALLERY_SLIDES.length;
+    });
+  }, [visibleCount]);
+
+  const prev = useCallback(() => {
+    setActiveIndex(
+      (i) => (i - 1 + GALLERY_SLIDES.length) % GALLERY_SLIDES.length
+    );
+  }, []);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -66,11 +78,13 @@ export default function Gallery() {
       {/* ===== MOBILE MASONRY ===== */}
       <div className="block md:hidden px-4">
         <div className="columns-2 gap-4 space-y-4">
-          {visibleImages.map((img, i) => (
+          {visibleImages.map((img) => (
             <MasonryImage
               key={img}
               src={img}
-              onClick={() => setActiveIndex(i)}
+              onClick={() =>
+                setActiveIndex(GALLERY_SLIDES.indexOf(img))
+              }
             />
           ))}
         </div>
@@ -101,7 +115,9 @@ export default function Gallery() {
                       src={group[0]}
                       big
                       onClick={() =>
-                        setActiveIndex(visibleImages.indexOf(group[0]))
+                        setActiveIndex(
+                          GALLERY_SLIDES.indexOf(group[0])
+                        )
                       }
                     />
                   </div>
@@ -110,7 +126,9 @@ export default function Gallery() {
                       <ImageCard
                         src={group[1]}
                         onClick={() =>
-                          setActiveIndex(visibleImages.indexOf(group[1]))
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[1])
+                          )
                         }
                       />
                     )}
@@ -118,7 +136,9 @@ export default function Gallery() {
                       <ImageCard
                         src={group[2]}
                         onClick={() =>
-                          setActiveIndex(visibleImages.indexOf(group[2]))
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[2])
+                          )
                         }
                       />
                     )}
@@ -131,7 +151,9 @@ export default function Gallery() {
                       <ImageCard
                         src={group[0]}
                         onClick={() =>
-                          setActiveIndex(visibleImages.indexOf(group[0]))
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[0])
+                          )
                         }
                       />
                     )}
@@ -139,7 +161,9 @@ export default function Gallery() {
                       <ImageCard
                         src={group[1]}
                         onClick={() =>
-                          setActiveIndex(visibleImages.indexOf(group[1]))
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[1])
+                          )
                         }
                       />
                     )}
@@ -149,7 +173,9 @@ export default function Gallery() {
                       src={group[2]}
                       big
                       onClick={() =>
-                        setActiveIndex(visibleImages.indexOf(group[2]))
+                        setActiveIndex(
+                          GALLERY_SLIDES.indexOf(group[2])
+                        )
                       }
                     />
                   </div>
@@ -160,11 +186,15 @@ export default function Gallery() {
         })}
       </div>
 
-      {/* LOAD MORE */}
+      {/* LOAD MORE (GRID ONLY) */}
       {visibleCount < GALLERY_SLIDES.length && (
         <div className="text-center mt-20">
           <button
-            onClick={() => setVisibleCount((v) => v + CHUNK_SIZE)}
+            onClick={() =>
+              setVisibleCount((v) =>
+                Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
+              )
+            }
             className="
               px-10 py-3 rounded-full
               bg-[#5a4585] text-white
@@ -189,22 +219,20 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             onClick={() => setActiveIndex(null)}
           >
-            {/* IMAGE WRAPPER */}
             <div
               className="relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* IMAGE */}
               <motion.img
-                key={visibleImages[activeIndex]}
-                src={visibleImages[activeIndex]}
+                key={GALLERY_SLIDES[activeIndex]}
+                src={GALLERY_SLIDES[activeIndex]}
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.9 }}
                 className="max-h-[85vh] max-w-[90vw] rounded-2xl"
               />
 
-              {/* ❌ CLOSE (TOP RIGHT) */}
+              {/* CLOSE */}
               <button
                 onClick={() => setActiveIndex(null)}
                 className="
@@ -218,7 +246,7 @@ export default function Gallery() {
                 ✕
               </button>
 
-              {/* ◀ PREV – MOBILE & DESKTOP */}
+              {/* PREV */}
               <button
                 onClick={prev}
                 className="
@@ -233,7 +261,7 @@ export default function Gallery() {
                 ‹
               </button>
 
-              {/* ▶ NEXT – MOBILE & DESKTOP */}
+              {/* NEXT */}
               <button
                 onClick={next}
                 className="
@@ -271,7 +299,6 @@ const ImageCard = memo(({ src, big = false, onClick }) => (
         object-cover
         object-[50%_20%]
         ${big ? "md:object-center" : ""}
-
         hover:scale-105 transition-transform duration-500
       `}
     />

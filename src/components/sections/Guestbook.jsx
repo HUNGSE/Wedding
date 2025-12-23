@@ -103,7 +103,7 @@ export default function Guestbook() {
         fetch(SHEET_API_URL)
             .then((res) => res.json())
             .then((data) => {
-                setMessages(data.reverse());
+                setMessages(data);
                 setLoading(false);
             })
             .catch(() => {
