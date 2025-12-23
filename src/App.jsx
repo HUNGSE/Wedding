@@ -7,7 +7,7 @@ function App() {
     <>
       <WeddingWebsiteFull />
 
-      {/* Toast global */}
+      {/* Toast global
       <ToastContainer
         position="top-center"
         autoClose={4000}
@@ -15,7 +15,7 @@ function App() {
         closeOnClick
         pauseOnHover
         draggable
-      />
+      /> */}
     </>
   );
 }
