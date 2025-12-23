@@ -26,10 +26,10 @@ const SaveTheDateBox = memo(({ delay }) => (
         {TEXT_CONTENT.saveTheDate.subtitle}
       </p>
       <div className="text-center mb-6">
-        <p className="text-xl font-semibold text-[#5a4585] font-[Playfair Display,serif]">
+        <p className="text-xl font-semibold text-[#b588a1] font-[Playfair Display,serif]">
             Huyền Trang
         </p>
-        <p className="text-xl font-semibold text-[#b588a1] font-[Playfair Display,serif]">
+        <p className="text-xl font-semibold text-[#5a4585] font-[Playfair Display,serif]">
             Văn Hùng
         </p>
       </div>
