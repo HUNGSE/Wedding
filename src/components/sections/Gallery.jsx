@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
 import { GALLERY_SLIDES, TEXT_CONTENT } from "../../data/weddingData";
 
 const CHUNK_SIZE = 8;
@@ -16,12 +17,12 @@ const chunkArray = (arr, size) => {
 /* ================= MAIN ================= */
 export default function Gallery() {
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
-  const [activeIndex, setActiveIndex] = useState(null); // index trong GALLERY_SLIDES
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const visibleImages = GALLERY_SLIDES.slice(0, visibleCount);
   const rows = chunkArray(visibleImages, 3);
 
-  /* ===== LIGHTBOX CONTROLS (FULL GALLERY) ===== */
+  /* ===== LIGHTBOX CONTROLS ===== */
   const next = useCallback(() => {
     setActiveIndex((i) => {
       const nextIndex = i + 1;
@@ -33,7 +34,6 @@ export default function Gallery() {
           Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
         );
       }
-
       return nextIndex % GALLERY_SLIDES.length;
     });
   }, [visibleCount]);
@@ -44,6 +44,7 @@ export default function Gallery() {
     );
   }, []);
 
+  /* ===== KEYBOARD (DESKTOP) ===== */
   useEffect(() => {
     const onKey = (e) => {
       if (activeIndex === null) return;
@@ -54,6 +55,14 @@ export default function Gallery() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [activeIndex, next, prev]);
+
+  /* ===== SWIPE (MOBILE SAFE) ===== */
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => next(),
+    onSwipedRight: () => prev(),
+    preventScrollOnSwipe: true,
+    trackMouse: false,
+  });
 
   return (
     <section
@@ -186,7 +195,7 @@ export default function Gallery() {
         })}
       </div>
 
-      {/* LOAD MORE (GRID ONLY) */}
+      {/* LOAD MORE */}
       {visibleCount < GALLERY_SLIDES.length && (
         <div className="text-center mt-20">
           <button
@@ -223,7 +232,9 @@ export default function Gallery() {
               className="relative"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* SWIPE-ENABLED IMAGE */}
               <motion.img
+                {...swipeHandlers}
                 key={GALLERY_SLIDES[activeIndex]}
                 src={GALLERY_SLIDES[activeIndex]}
                 initial={{ scale: 0.9 }}
@@ -232,14 +243,15 @@ export default function Gallery() {
                 className="max-h-[85vh] max-w-[90vw] rounded-2xl"
               />
 
-              {/* CLOSE */}
+              {/* CLOSE (DESKTOP ONLY) */}
               <button
                 onClick={() => setActiveIndex(null)}
                 className="
+                  hidden md:flex
                   absolute -top-4 -right-4
                   w-10 h-10 rounded-full
                   bg-black/70 text-white
-                  flex items-center justify-center
+                  items-center justify-center
                   hover:bg-black transition
                 "
               >
