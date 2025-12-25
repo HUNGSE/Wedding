@@ -154,19 +154,19 @@ export const WEDDING_EVENTS = [
     title: "Lễ Vu Quy",
     time: "10:30 - 08/02/2026",
     address: "Tư Gia Nhà Gái - xã Sơn Tiến, Hà Tĩnh",
-    img: ev2,
+    img: img4,
   },
   {
     title: "Lễ Cưới Nhà Trai",
     time: "08:45 - 12/02/2026",
     address: "Tư Gia Nhà Trai - TDP Vân Bắc - Ba Đồn - Quảng Trị",
-    img: ev3,
+    img: img35,
   },
   {
     title: "Tiệc Cưới Nhà Trai",
     time: "11:30 - 12/02/2026",
     address: "Nhà Văn hóa - TDP Vân Bắc - Ba Đồn - Quảng Trị",
-    img: ev4,
+    img: img5,
   },
 ];
 
