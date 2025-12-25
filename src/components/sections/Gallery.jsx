@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GALLERY_SLIDES, TEXT_CONTENT } from "../../data/weddingData";
 
 const CHUNK_SIZE = 8;
-const SWIPE_THRESHOLD = 80;
 
 /* ================= UTILS ================= */
 const chunkArray = (arr, size) => {
@@ -17,30 +16,22 @@ const chunkArray = (arr, size) => {
 /* ================= MAIN ================= */
 export default function Gallery() {
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null); // index trong GALLERY_SLIDES
 
   const visibleImages = GALLERY_SLIDES.slice(0, visibleCount);
   const rows = chunkArray(visibleImages, 3);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = activeIndex !== null ? "hidden" : "";
-  }, [activeIndex]);
 
   /* ===== LIGHTBOX CONTROLS (FULL GALLERY) ===== */
   const next = useCallback(() => {
     setActiveIndex((i) => {
       const nextIndex = i + 1;
-
-      if (nextIndex >= visibleCount && visibleCount < GALLERY_SLIDES.length) {
-        setVisibleCount((v) => Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length));
+      if (
+        nextIndex >= visibleCount &&
+        visibleCount < GALLERY_SLIDES.length
+      ) {
+        setVisibleCount((v) =>
+          Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
+        );
       }
 
       return nextIndex % GALLERY_SLIDES.length;
@@ -48,7 +39,9 @@ export default function Gallery() {
   }, [visibleCount]);
 
   const prev = useCallback(() => {
-    setActiveIndex((i) => (i - 1 + GALLERY_SLIDES.length) % GALLERY_SLIDES.length);
+    setActiveIndex(
+      (i) => (i - 1 + GALLERY_SLIDES.length) % GALLERY_SLIDES.length
+    );
   }, []);
 
   useEffect(() => {
@@ -63,7 +56,10 @@ export default function Gallery() {
   }, [activeIndex, next, prev]);
 
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-b from-white to-[#fcf7fa]">
+    <section
+      id="gallery"
+      className="py-24 bg-gradient-to-b from-white to-[#fcf7fa]"
+    >
       {/* TITLE */}
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
@@ -86,7 +82,9 @@ export default function Gallery() {
             <MasonryImage
               key={img}
               src={img}
-              onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(img))}
+              onClick={() =>
+                setActiveIndex(GALLERY_SLIDES.indexOf(img))
+              }
             />
           ))}
         </div>
@@ -116,20 +114,32 @@ export default function Gallery() {
                     <ImageCard
                       src={group[0]}
                       big
-                      onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(group[0]))}
+                      onClick={() =>
+                        setActiveIndex(
+                          GALLERY_SLIDES.indexOf(group[0])
+                        )
+                      }
                     />
                   </div>
                   <div className="flex flex-col gap-6">
                     {group[1] && (
                       <ImageCard
                         src={group[1]}
-                        onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(group[1]))}
+                        onClick={() =>
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[1])
+                          )
+                        }
                       />
                     )}
                     {group[2] && (
                       <ImageCard
                         src={group[2]}
-                        onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(group[2]))}
+                        onClick={() =>
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[2])
+                          )
+                        }
                       />
                     )}
                   </div>
@@ -140,13 +150,21 @@ export default function Gallery() {
                     {group[0] && (
                       <ImageCard
                         src={group[0]}
-                        onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(group[0]))}
+                        onClick={() =>
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[0])
+                          )
+                        }
                       />
                     )}
                     {group[1] && (
                       <ImageCard
                         src={group[1]}
-                        onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(group[1]))}
+                        onClick={() =>
+                          setActiveIndex(
+                            GALLERY_SLIDES.indexOf(group[1])
+                          )
+                        }
                       />
                     )}
                   </div>
@@ -154,7 +172,11 @@ export default function Gallery() {
                     <ImageCard
                       src={group[2]}
                       big
-                      onClick={() => setActiveIndex(GALLERY_SLIDES.indexOf(group[2]))}
+                      onClick={() =>
+                        setActiveIndex(
+                          GALLERY_SLIDES.indexOf(group[2])
+                        )
+                      }
                     />
                   </div>
                 </>
@@ -169,7 +191,9 @@ export default function Gallery() {
         <div className="text-center mt-20">
           <button
             onClick={() =>
-              setVisibleCount((v) => Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length))
+              setVisibleCount((v) =>
+                Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
+              )
             }
             className="
               px-10 py-3 rounded-full
@@ -195,38 +219,20 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             onClick={() => setActiveIndex(null)}
           >
-            <div className="relative" onClick={(e) => e.stopPropagation()}>
-              {/* ✅ MOBILE: swipe slider */}
-              {isMobile ? (
-                <motion.img
-                  key={activeIndex}
-                  src={GALLERY_SLIDES[activeIndex]}
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={0.2}
-                  onDragEnd={(e, info) => {
-                    if (info.offset.x < -SWIPE_THRESHOLD) next();
-                    if (info.offset.x > SWIPE_THRESHOLD) prev();
-                  }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 30 }}
-                  className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain select-none"
-                />
-              ) : (
-                
-                <motion.img
-                  key={GALLERY_SLIDES[activeIndex]}
-                  src={GALLERY_SLIDES[activeIndex]}
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  exit={{ scale: 0.9 }}
-                  className="max-h-[85vh] max-w-[90vw] rounded-2xl"
-                />
-              )}
+            <div
+              className="relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.img
+                key={GALLERY_SLIDES[activeIndex]}
+                src={GALLERY_SLIDES[activeIndex]}
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                className="max-h-[85vh] max-w-[90vw] rounded-2xl"
+              />
 
-              {}
+              {/* CLOSE */}
               <button
                 onClick={() => setActiveIndex(null)}
                 className="
@@ -240,38 +246,35 @@ export default function Gallery() {
                 ✕
               </button>
 
-              {}
-              {!isMobile && (
-                <>
-                  <button
-                    onClick={prev}
-                    className="
-                      absolute left-2 md:left-[-56px]
-                      top-1/2 -translate-y-1/2
-                      w-10 h-10 rounded-full
-                      bg-black/40 text-white text-3xl
-                      flex items-center justify-center
-                      hover:bg-black/60 transition
-                    "
-                  >
-                    ‹
-                  </button>
+              {/* PREV */}
+              <button
+                onClick={prev}
+                className="
+                  absolute left-2 md:left-[-56px]
+                  top-1/2 -translate-y-1/2
+                  w-10 h-10 rounded-full
+                  bg-black/40 text-white text-3xl
+                  flex items-center justify-center
+                  hover:bg-black/60 transition
+                "
+              >
+                ‹
+              </button>
 
-                  <button
-                    onClick={next}
-                    className="
-                      absolute right-2 md:right-[-56px]
-                      top-1/2 -translate-y-1/2
-                      w-10 h-10 rounded-full
-                      bg-black/40 text-white text-3xl
-                      flex items-center justify-center
-                      hover:bg-black/60 transition
-                    "
-                  >
-                    ›
-                  </button>
-                </>
-              )}
+              {/* NEXT */}
+              <button
+                onClick={next}
+                className="
+                  absolute right-2 md:right-[-56px]
+                  top-1/2 -translate-y-1/2
+                  w-10 h-10 rounded-full
+                  bg-black/40 text-white text-3xl
+                  flex items-center justify-center
+                  hover:bg-black/60 transition
+                "
+              >
+                ›
+              </button>
             </div>
           </motion.div>
         )}
@@ -283,7 +286,10 @@ export default function Gallery() {
 /* ================= COMPONENTS ================= */
 
 const ImageCard = memo(({ src, big = false, onClick }) => (
-  <div onClick={onClick} className="rounded-[28px] overflow-hidden shadow-xl cursor-zoom-in">
+  <div
+    onClick={onClick}
+    className="rounded-[28px] overflow-hidden shadow-xl cursor-zoom-in"
+  >
     <img
       src={src}
       loading="lazy"
