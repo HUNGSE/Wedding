@@ -1,48 +1,60 @@
-import { useState, useEffect, useCallback, memo } from "react";
+import { useState, useEffect, useCallback, memo, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
-import { GALLERY_SLIDES, TEXT_CONTENT } from "../../data/weddingData";
+import { GALLERY_TABS, TEXT_CONTENT } from "../../data/weddingData";
 
 const CHUNK_SIZE = 8;
 
 /* ================= UTILS ================= */
 const chunkArray = (arr, size) => {
   const res = [];
-  for (let i = 0; i < arr.length; i += size) {
-    res.push(arr.slice(i, i + size));
-  }
+  for (let i = 0; i < arr.length; i += size) res.push(arr.slice(i, i + size));
   return res;
 };
 
+const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+
 /* ================= MAIN ================= */
 export default function Gallery() {
+  const tabs = useMemo(() => GALLERY_TABS || [], []);
+  const [activeTabId, setActiveTabId] = useState(tabs?.[0]?.id || "prewedding");
+
+  const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
+  const slides = activeTab?.slides || [];
+
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const visibleImages = GALLERY_SLIDES.slice(0, visibleCount);
+  // Reset khi đổi tab
+  useEffect(() => {
+    setVisibleCount(CHUNK_SIZE);
+    setActiveIndex(null);
+  }, [activeTabId]);
+
+  const visibleImages = slides.slice(0, visibleCount);
   const rows = chunkArray(visibleImages, 3);
 
   /* ===== LIGHTBOX CONTROLS ===== */
   const next = useCallback(() => {
     setActiveIndex((i) => {
+      if (i === null) return 0;
       const nextIndex = i + 1;
-      if (
-        nextIndex >= visibleCount &&
-        visibleCount < GALLERY_SLIDES.length
-      ) {
-        setVisibleCount((v) =>
-          Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
-        );
+
+      // Nếu đang ở cuối phần đã load mà vẫn còn ảnh -> auto load thêm
+      if (nextIndex >= visibleCount && visibleCount < slides.length) {
+        setVisibleCount((v) => Math.min(v + CHUNK_SIZE, slides.length));
       }
-      return nextIndex % GALLERY_SLIDES.length;
+
+      return nextIndex % slides.length;
     });
-  }, [visibleCount]);
+  }, [visibleCount, slides.length]);
 
   const prev = useCallback(() => {
-    setActiveIndex(
-      (i) => (i - 1 + GALLERY_SLIDES.length) % GALLERY_SLIDES.length
-    );
-  }, []);
+    setActiveIndex((i) => {
+      if (i === null) return 0;
+      return (i - 1 + slides.length) % slides.length;
+    });
+  }, [slides.length]);
 
   /* ===== KEYBOARD (DESKTOP) ===== */
   useEffect(() => {
@@ -64,11 +76,11 @@ export default function Gallery() {
     trackMouse: false,
   });
 
+  // Guard: nếu tab không có ảnh
+  const isEmpty = slides.length === 0;
+
   return (
-    <section
-      id="gallery"
-      className="py-24 bg-gradient-to-b from-white to-[#fcf7fa]"
-    >
+    <section id="gallery" className="py-24 bg-gradient-to-b from-white to-[#fcf7fa]">
       {/* TITLE */}
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
@@ -84,126 +96,131 @@ export default function Gallery() {
         {TEXT_CONTENT.gallery.title}
       </motion.h2>
 
-      {/* ===== MOBILE MASONRY ===== */}
-      <div className="block md:hidden px-4">
-        <div className="columns-2 gap-4 space-y-4">
-          {visibleImages.map((img) => (
-            <MasonryImage
-              key={img}
-              src={img}
-              onClick={() =>
-                setActiveIndex(GALLERY_SLIDES.indexOf(img))
-              }
-            />
-          ))}
+      {/* TABS */}
+      <div className="flex justify-center mb-12 px-4">
+        <div className="inline-flex flex-wrap justify-center gap-2 rounded-full bg-white border border-[#e8d9d0] shadow-sm p-1.5">
+          {tabs.map((t) => {
+            const isActive = t.id === activeTabId;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setActiveTabId(t.id)}
+                className={[
+                  "px-4 sm:px-5 py-2 rounded-full text-sm sm:text-[15px] font-medium transition",
+                  isActive
+                    ? "bg-[#5a4585] text-white shadow-sm"
+                    : "text-[#5a4585] hover:bg-[#fcf7fa]",
+                ].join(" ")}
+              >
+                {t.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* ===== DESKTOP MAGAZINE ===== */}
-      <div className="hidden md:block">
-        {rows.map((group, rowIndex) => {
-          const even = rowIndex % 2 === 0;
-          const rowKey = group.join("-");
+      {/* EMPTY STATE */}
+      {isEmpty && (
+        <div className="text-center text-[#6d6d6d] px-4">
+          Album này chưa có ảnh.
+        </div>
+      )}
 
-          return (
-            <motion.div
-              key={rowKey}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="
-                grid grid-cols-4 gap-6
-                max-w-5xl mx-auto px-6 mb-12
-              "
-            >
-              {even ? (
-                <>
-                  <div className="col-span-3">
-                    <ImageCard
-                      src={group[0]}
-                      big
-                      onClick={() =>
-                        setActiveIndex(
-                          GALLERY_SLIDES.indexOf(group[0])
-                        )
-                      }
-                    />
-                  </div>
-                  <div className="flex flex-col gap-6">
-                    {group[1] && (
-                      <ImageCard
-                        src={group[1]}
-                        onClick={() =>
-                          setActiveIndex(
-                            GALLERY_SLIDES.indexOf(group[1])
-                          )
-                        }
-                      />
-                    )}
-                    {group[2] && (
-                      <ImageCard
-                        src={group[2]}
-                        onClick={() =>
-                          setActiveIndex(
-                            GALLERY_SLIDES.indexOf(group[2])
-                          )
-                        }
-                      />
-                    )}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex flex-col gap-6">
-                    {group[0] && (
+      {/* ===== MOBILE MASONRY ===== */}
+      {!isEmpty && (
+        <div className="block md:hidden px-4">
+          <div className="columns-2 gap-4 space-y-4">
+            {visibleImages.map((img, idx) => (
+              <MasonryImage
+                key={`${activeTabId}-${img}-${idx}`}
+                src={img}
+                onClick={() => setActiveIndex(idx)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ===== DESKTOP MAGAZINE ===== */}
+      {!isEmpty && (
+        <div className="hidden md:block">
+          {rows.map((group, rowIndex) => {
+            const even = rowIndex % 2 === 0;
+            const rowKey = `${activeTabId}-${rowIndex}-${group.join("-")}`;
+
+            return (
+              <motion.div
+                key={rowKey}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="
+                  grid grid-cols-4 gap-6
+                  max-w-5xl mx-auto px-6 mb-12
+                "
+              >
+                {even ? (
+                  <>
+                    <div className="col-span-3">
                       <ImageCard
                         src={group[0]}
-                        onClick={() =>
-                          setActiveIndex(
-                            GALLERY_SLIDES.indexOf(group[0])
-                          )
-                        }
+                        big
+                        onClick={() => setActiveIndex(slides.indexOf(group[0]))}
                       />
-                    )}
-                    {group[1] && (
+                    </div>
+                    <div className="flex flex-col gap-6">
+                      {group[1] && (
+                        <ImageCard
+                          src={group[1]}
+                          onClick={() => setActiveIndex(slides.indexOf(group[1]))}
+                        />
+                      )}
+                      {group[2] && (
+                        <ImageCard
+                          src={group[2]}
+                          onClick={() => setActiveIndex(slides.indexOf(group[2]))}
+                        />
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex flex-col gap-6">
+                      {group[0] && (
+                        <ImageCard
+                          src={group[0]}
+                          onClick={() => setActiveIndex(slides.indexOf(group[0]))}
+                        />
+                      )}
+                      {group[1] && (
+                        <ImageCard
+                          src={group[1]}
+                          onClick={() => setActiveIndex(slides.indexOf(group[1]))}
+                        />
+                      )}
+                    </div>
+                    <div className="col-span-3">
                       <ImageCard
-                        src={group[1]}
-                        onClick={() =>
-                          setActiveIndex(
-                            GALLERY_SLIDES.indexOf(group[1])
-                          )
-                        }
+                        src={group[2]}
+                        big
+                        onClick={() => setActiveIndex(slides.indexOf(group[2]))}
                       />
-                    )}
-                  </div>
-                  <div className="col-span-3">
-                    <ImageCard
-                      src={group[2]}
-                      big
-                      onClick={() =>
-                        setActiveIndex(
-                          GALLERY_SLIDES.indexOf(group[2])
-                        )
-                      }
-                    />
-                  </div>
-                </>
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      )}
 
       {/* LOAD MORE */}
-      {visibleCount < GALLERY_SLIDES.length && (
+      {!isEmpty && visibleCount < slides.length && (
         <div className="text-center mt-20">
           <button
-            onClick={() =>
-              setVisibleCount((v) =>
-                Math.min(v + CHUNK_SIZE, GALLERY_SLIDES.length)
-              )
-            }
+            onClick={() => setVisibleCount((v) => Math.min(v + CHUNK_SIZE, slides.length))}
             className="
               px-10 py-3 rounded-full
               bg-[#5a4585] text-white
@@ -217,7 +234,7 @@ export default function Gallery() {
 
       {/* ===== LIGHTBOX ===== */}
       <AnimatePresence>
-        {activeIndex !== null && (
+        {activeIndex !== null && slides.length > 0 && (
           <motion.div
             className="
               fixed inset-0 z-50 bg-black/85
@@ -228,15 +245,12 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             onClick={() => setActiveIndex(null)}
           >
-            <div
-              className="relative"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
               {/* SWIPE-ENABLED IMAGE */}
               <motion.img
                 {...swipeHandlers}
-                key={GALLERY_SLIDES[activeIndex]}
-                src={GALLERY_SLIDES[activeIndex]}
+                key={`${activeTabId}-${slides[activeIndex]}`}
+                src={slides[activeIndex]}
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.9 }}
