@@ -281,7 +281,7 @@ export const LOVE_STORY_ITEMS = [
     title: "Thành Hôn",
     year: "12 / 02 / 2026",
     text: "Giây phút thiêng liêng ấy - khi hai người trao nhau lời thề nguyện. Từ đây, họ chính thức trở thành vợ chồng, cùng nhau đi tiếp chặng đường đời hạnh phúc.",
-    image: thanhhon,
+    image: MIA01210,
     reverse: false,
   },
 ];
@@ -304,7 +304,7 @@ export const WEDDING_EVENTS = [
     title: "Lễ Thành Hôn",
     time: "11:30 - 12/02/2026",
     address: "Nhà Văn hóa - TDP Vân Bắc - Ba Đồn - Quảng Trị",
-    img: thanhhon,
+    img: MIA01285,
   },
     {
     title: "Lễ Báo Hỷ",
