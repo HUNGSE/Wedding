@@ -309,8 +309,10 @@ export const WEDDING_EVENTS = [
     {
     title: "Lễ Báo Hỷ",
     time: "11:00 - 05/04/2026",
-    address: "Trung tâm hội nghị tiệc cưới Claris Place 22 đường Hiệp Bình, Hiệp Bình Phước, Thủ Đức",
+    address:
+      "Trung tâm hội nghị tiệc cưới Claris Place 22 đường Hiệp Bình, Hiệp Bình Phước, Thủ Đức",
     img: img35,
+    mapUrl: "https://maps.app.goo.gl/eK9smEa9GLz1poHh7",
   },
 ];
 

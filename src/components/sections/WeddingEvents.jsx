@@ -22,8 +22,23 @@ const EventCard = memo(({ event }) => (
         <p className="text-sm text-[#b588a1] mb-2 flex items-center gap-2">
           <span>🕒</span> {event.time}
         </p>
-        <p className="text-sm text-[#6d6d6d] flex items-center gap-2">
-          <span>📍</span> {event.address}
+
+        <p className="text-sm text-[#6d6d6d] flex items-start gap-2">
+          <span className="mt-[2px]">📍</span>
+
+          {event.mapUrl ? (
+            <a
+              href={event.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-dotted hover:text-[#5a4585] transition"
+              title="Mở Google Maps"
+            >
+              {event.address}
+            </a>
+          ) : (
+            <span>{event.address}</span>
+          )}
         </p>
       </div>
     </div>
