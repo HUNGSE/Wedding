@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 /* ================= CONFIG ================= */
 const SHEET_API_URL =
-    "https://script.google.com/macros/s/AKfycbzqggp5OJVcaD12Z1qPhtA0oehbEzSJfMc0v0k_hEph4HqxWzoAJb77k-Z67fFciCdkZw/exec";
+    "https://script.google.com/macros/s/AKfycbxIx-iTqXl3bfcOtPZR3pRpLB1DI6zgkTJr5B6x0McP5cp-UnGCaEApr07demLmT_U6Gg/exec";
 
 /* ================= FORM ================= */
 const GuestbookForm = memo(({ onSubmit }) => {
